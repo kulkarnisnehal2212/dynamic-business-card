@@ -26,8 +26,55 @@ function QRGenerator() {
     linkedin: '',
     location: ''
   });
+  const [uploadedImages, setUploadedImages] = useState({
+    profile: '',
+    logo: '',
+    pattern: ''
+  });
   const [generatedURL, setGeneratedURL] = useState('');
   const [qrCodeURL, setQrCodeURL] = useState('');
+
+  const handleImageUpload = async (type, file) => {
+    if (!file) return;
+    
+    if (file.size > 200 * 1024) {
+      alert('File too large. Please use image under 200KB.');
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const img = new Image();
+      img.onload = function() {
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        
+        const maxSize = 150;
+        let { width, height } = img;
+        
+        if (width > height) {
+          height = (height * maxSize) / width;
+          width = maxSize;
+        } else {
+          width = (width * maxSize) / height;
+          height = maxSize;
+        }
+        
+        canvas.width = width;
+        canvas.height = height;
+        ctx.drawImage(img, 0, 0, width, height);
+        
+        const compressedBase64 = canvas.toDataURL('image/jpeg', 0.3);
+        
+        setUploadedImages(prev => ({
+          ...prev,
+          [type]: compressedBase64
+        }));
+      };
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  };
 
   const handleInputChange = (e) => {
     setFormData({
@@ -50,6 +97,13 @@ function QRGenerator() {
     // Add all form data to URL
     Object.entries(formData).forEach(([key, value]) => {
       if (value.trim()) {
+        params.append(key, value);
+      }
+    });
+    
+    // Add compressed images to URL
+    Object.entries(uploadedImages).forEach(([key, value]) => {
+      if (value) {
         params.append(key, value);
       }
     });
@@ -167,6 +221,45 @@ function QRGenerator() {
             onChange={handleInputChange}
             style={{ padding: '10px', border: '2px solid #ddd', borderRadius: '5px' }}
           />
+          
+          <div>
+            <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold' }}>Profile Image (Optional)</label>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={(e) => handleImageUpload('profile', e.target.files[0])}
+              style={{ padding: '10px', border: '2px solid #ddd', borderRadius: '5px', width: '100%' }}
+            />
+            {uploadedImages.profile && (
+              <img src={uploadedImages.profile} alt="Profile preview" style={{ maxWidth: '100px', marginTop: '10px', borderRadius: '5px' }} />
+            )}
+          </div>
+          
+          <div>
+            <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold' }}>Company Logo (Optional)</label>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={(e) => handleImageUpload('logo', e.target.files[0])}
+              style={{ padding: '10px', border: '2px solid #ddd', borderRadius: '5px', width: '100%' }}
+            />
+            {uploadedImages.logo && (
+              <img src={uploadedImages.logo} alt="Logo preview" style={{ maxWidth: '100px', marginTop: '10px', borderRadius: '5px' }} />
+            )}
+          </div>
+          
+          <div>
+            <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold' }}>Background Pattern (Optional)</label>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={(e) => handleImageUpload('pattern', e.target.files[0])}
+              style={{ padding: '10px', border: '2px solid #ddd', borderRadius: '5px', width: '100%' }}
+            />
+            {uploadedImages.pattern && (
+              <img src={uploadedImages.pattern} alt="Pattern preview" style={{ maxWidth: '100px', marginTop: '10px', borderRadius: '5px' }} />
+            )}
+          </div>
         </div>
 
         <button 
@@ -285,9 +378,9 @@ function BusinessCard() {
     facebook: urlParams.get('facebook') || '',
     linkedin: urlParams.get('linkedin') || '',
     location: urlParams.get('location') || '',
-    profileImg: profileImg,
-    logoImg: logoImg,
-    patternImg: '/pattern-tile.png'
+    profileImg: urlParams.get('profile') || profileImg,
+    logoImg: urlParams.get('logo') || logoImg,
+    patternImg: urlParams.get('pattern') || '/pattern-tile.png'
   };
 
   return (
