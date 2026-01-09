@@ -23,12 +23,13 @@ function App() {
     role: urlParams.get('role') || 'Hr and Operations Head',
     phone: urlParams.get('phone') || '8237358995',
     email: urlParams.get('email') || 'hr@srgpune.in',
-    instagram: urlParams.get('instagram') || 'https://www.instagram.com/swastikrealtygroup/',
-    facebook: urlParams.get('facebook') || 'https://www.facebook.com/swastikbuilder',
-    linkedin: urlParams.get('linkedin') || 'https://www.linkedin.com/company/swastikk-realty-group/',
-    location: urlParams.get('location') || 'https://share.google/3brpEYu7twAhBYnou',
+    instagram: urlParams.get('instagram') || '',
+    facebook: urlParams.get('facebook') || '',
+    linkedin: urlParams.get('linkedin') || '',
+    location: urlParams.get('location') || '',
     profileImg: urlParams.get('profile') || profileImg,
-    logoImg: urlParams.get('logo') || logoImg
+    logoImg: urlParams.get('logo') || logoImg,
+    patternImg: urlParams.get('pattern') || '/pattern-tile.png'
   };
 
   return (
@@ -51,21 +52,31 @@ function App() {
         </a>
 
         <div className="social-row">
-          <a href={clientData.instagram} className="social-icon" target="_blank" rel="noopener noreferrer">
-            <FontAwesomeIcon icon={faInstagram} />
-          </a>
-          <a href={clientData.facebook} className="social-icon" target="_blank" rel="noopener noreferrer">
-            <FontAwesomeIcon icon={faFacebook} />
-          </a>
-          <a href={clientData.linkedin} className="social-icon" target="_blank" rel="noopener noreferrer">
-            <FontAwesomeIcon icon={faLinkedin} />
-          </a>
-          <a href={clientData.location} className="social-icon" target="_blank" rel="noopener noreferrer">
-            <FontAwesomeIcon icon={faLocationDot} />
-          </a>
+          {clientData.instagram && (
+            <a href={clientData.instagram} className="social-icon" target="_blank" rel="noopener noreferrer">
+              <FontAwesomeIcon icon={faInstagram} />
+            </a>
+          )}
+          {clientData.facebook && (
+            <a href={clientData.facebook} className="social-icon" target="_blank" rel="noopener noreferrer">
+              <FontAwesomeIcon icon={faFacebook} />
+            </a>
+          )}
+          {clientData.linkedin && (
+            <a href={clientData.linkedin} className="social-icon" target="_blank" rel="noopener noreferrer">
+              <FontAwesomeIcon icon={faLinkedin} />
+            </a>
+          )}
+          {clientData.location && (
+            <a href={clientData.location} className="social-icon" target="_blank" rel="noopener noreferrer">
+              <FontAwesomeIcon icon={faLocationDot} />
+            </a>
+          )}
         </div>
 
-        <div className="pattern"></div>
+        <div className="pattern" style={{
+          backgroundImage: `url(${clientData.patternImg})`
+        }}></div>
       </div>
     </div>
   );
