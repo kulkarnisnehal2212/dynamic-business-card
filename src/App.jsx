@@ -189,12 +189,7 @@ function BusinessCard() {
   const urlParams = new URLSearchParams(window.location.search);
   const clientParam = urlParams.get('client');
   
-  console.log('URL Params:', window.location.search);
-  console.log('Client Param:', clientParam);
-  console.log('Available Templates:', Object.keys(CLIENT_TEMPLATES));
-  
   const clientData = CLIENT_TEMPLATES[clientParam] || CLIENT_TEMPLATES.default;
-  console.log('Selected Client Data:', clientData.name);
 
   return (
     <div className="screen">
@@ -250,7 +245,6 @@ function BusinessCard() {
 function App() {
   const urlParams = new URLSearchParams(window.location.search);
   const isAdmin = urlParams.get('admin') === 'true';
-  const hasClientParam = urlParams.has('client');
   
   // Admin generator access: ?admin=true
   if (isAdmin) {
@@ -260,14 +254,6 @@ function App() {
   }
   
   // Client card view: ?client=name or default
-  document.body.style.overflow = 'hidden';
-  document.documentElement.style.overflow = 'hidden';
-  return <BusinessCard />;
-}
-
-export default App; <QRGenerator />;
-  }
-  
   document.body.style.overflow = 'hidden';
   document.documentElement.style.overflow = 'hidden';
   return <BusinessCard />;
