@@ -24,57 +24,12 @@ function QRGenerator() {
     instagram: '',
     facebook: '',
     linkedin: '',
-    location: ''
-  });
-  const [uploadedImages, setUploadedImages] = useState({
-    profile: '',
-    logo: '',
-    pattern: ''
+    location: '',
+    profileUrl: '',
+    logoUrl: ''
   });
   const [generatedURL, setGeneratedURL] = useState('');
   const [qrCodeURL, setQrCodeURL] = useState('');
-
-  const handleImageUpload = async (type, file) => {
-    if (!file) return;
-    
-    if (file.size > 200 * 1024) {
-      alert('File too large. Please use image under 200KB.');
-      return;
-    }
-
-    const reader = new FileReader();
-    reader.onload = function(e) {
-      const img = new Image();
-      img.onload = function() {
-        const canvas = document.createElement('canvas');
-        const ctx = canvas.getContext('2d');
-        
-        const maxSize = 150;
-        let { width, height } = img;
-        
-        if (width > height) {
-          height = (height * maxSize) / width;
-          width = maxSize;
-        } else {
-          width = (width * maxSize) / height;
-          height = maxSize;
-        }
-        
-        canvas.width = width;
-        canvas.height = height;
-        ctx.drawImage(img, 0, 0, width, height);
-        
-        const compressedBase64 = canvas.toDataURL('image/jpeg', 0.3);
-        
-        setUploadedImages(prev => ({
-          ...prev,
-          [type]: compressedBase64
-        }));
-      };
-      img.src = e.target.result;
-    };
-    reader.readAsDataURL(file);
-  };
 
   const handleInputChange = (e) => {
     setFormData({
@@ -90,32 +45,24 @@ function QRGenerator() {
       return;
     }
 
-    // Use Vercel URL instead of localhost
-    const baseURL = 'https://dynamic-business-card-blond.vercel.app';
-    const params = new URLSearchParams();
+    // Create a unique hash for this data
+    const dataString = JSON.stringify(formData);
+    const hash = btoa(dataString).replace(/[+/=]/g, '').substring(0, 8);
     
-    // Add all form data to URL
-    Object.entries(formData).forEach(([key, value]) => {
-      if (value.trim()) {
-        params.append(key, value);
-      }
-    });
+    // Store data in localStorage with hash as key
+    localStorage.setItem(`card_${hash}`, dataString);
     
-    // Add compressed images to URL
-    Object.entries(uploadedImages).forEach(([key, value]) => {
-      if (value) {
-        params.append(key, value);
-      }
-    });
+    // Create very short URL with just the hash
+    const shortURL = `https://dynamic-business-card-blond.vercel.app?id=${hash}`;
     
-    const fullURL = baseURL + '?' + params.toString();
-    setGeneratedURL(fullURL);
+    console.log('Original data:', formData);
+    console.log('Compressed URL:', shortURL);
+    console.log('URL Length:', shortURL.length);
     
-    console.log('Generated URL:', fullURL);
-    console.log('URL Length:', fullURL.length);
+    setGeneratedURL(shortURL);
     
-    // Generate QR code using QR Server API
-    const qrURL = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(fullURL)}`;
+    // Generate QR code using compressed URL
+    const qrURL = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(shortURL)}`;
     console.log('QR URL:', qrURL);
     setQrCodeURL(qrURL);
   };
@@ -143,7 +90,16 @@ function QRGenerator() {
     }}>
       <div style={{ background: 'white', padding: '30px', borderRadius: '10px', boxShadow: '0 4px 16px rgba(0,0,0,0.1)' }}>
         <h1 style={{ color: '#4f3a39', textAlign: 'center', marginBottom: '10px' }}>🎯 Business Card Generator</h1>
-        <p style={{ textAlign: 'center', color: '#666', marginBottom: '30px' }}>Create custom business cards with QR codes</p>
+        <p style={{ textAlign: 'center', color: '#666', marginBottom: '20px' }}>Create custom business cards with QR codes</p>
+        
+        <div style={{ background: '#e8f4fd', padding: '15px', borderRadius: '5px', marginBottom: '20px', fontSize: '14px' }}>
+          <strong>📸 For Custom Images:</strong><br/>
+          1. Go to <a href="https://imgbb.com" target="_blank" rel="noopener noreferrer" style={{ color: '#007bff' }}>imgbb.com</a><br/>
+          2. Upload your profile photo and company logo<br/>
+          3. Copy the "Direct Link" URLs<br/>
+          4. Paste them in the fields below<br/><br/>
+          <strong>✨ URL Compression:</strong> Long URLs are automatically shortened for better QR codes!
+        </div>
         
         <div style={{ display: 'grid', gap: '15px', marginBottom: '20px' }}>
           <input
@@ -222,44 +178,23 @@ function QRGenerator() {
             style={{ padding: '10px', border: '2px solid #ddd', borderRadius: '5px' }}
           />
           
-          <div>
-            <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold' }}>Profile Image (Optional)</label>
-            <input
-              type="file"
-              accept="image/*"
-              onChange={(e) => handleImageUpload('profile', e.target.files[0])}
-              style={{ padding: '10px', border: '2px solid #ddd', borderRadius: '5px', width: '100%' }}
-            />
-            {uploadedImages.profile && (
-              <img src={uploadedImages.profile} alt="Profile preview" style={{ maxWidth: '100px', marginTop: '10px', borderRadius: '5px' }} />
-            )}
-          </div>
+          <input
+            type="url"
+            name="profileUrl"
+            placeholder="Profile Image URL - Use imgbb.com (Optional)"
+            value={formData.profileUrl}
+            onChange={handleInputChange}
+            style={{ padding: '10px', border: '2px solid #ddd', borderRadius: '5px' }}
+          />
           
-          <div>
-            <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold' }}>Company Logo (Optional)</label>
-            <input
-              type="file"
-              accept="image/*"
-              onChange={(e) => handleImageUpload('logo', e.target.files[0])}
-              style={{ padding: '10px', border: '2px solid #ddd', borderRadius: '5px', width: '100%' }}
-            />
-            {uploadedImages.logo && (
-              <img src={uploadedImages.logo} alt="Logo preview" style={{ maxWidth: '100px', marginTop: '10px', borderRadius: '5px' }} />
-            )}
-          </div>
-          
-          <div>
-            <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold' }}>Background Pattern (Optional)</label>
-            <input
-              type="file"
-              accept="image/*"
-              onChange={(e) => handleImageUpload('pattern', e.target.files[0])}
-              style={{ padding: '10px', border: '2px solid #ddd', borderRadius: '5px', width: '100%' }}
-            />
-            {uploadedImages.pattern && (
-              <img src={uploadedImages.pattern} alt="Pattern preview" style={{ maxWidth: '100px', marginTop: '10px', borderRadius: '5px' }} />
-            )}
-          </div>
+          <input
+            type="url"
+            name="logoUrl"
+            placeholder="Company Logo URL - Use imgbb.com (Optional)"
+            value={formData.logoUrl}
+            onChange={handleInputChange}
+            style={{ padding: '10px', border: '2px solid #ddd', borderRadius: '5px' }}
+          />
         </div>
 
         <button 
@@ -276,7 +211,7 @@ function QRGenerator() {
             marginBottom: '20px'
           }}
         >
-          🚀 Generate Business Card & QR Code
+          🚀 Generate Short URL & QR Code
         </button>
 
         {generatedURL && (
@@ -369,19 +304,60 @@ function QRGenerator() {
 function BusinessCard() {
   const urlParams = new URLSearchParams(window.location.search);
   
-  const clientData = {
-    name: urlParams.get('name') || 'Asha Thakur',
-    role: urlParams.get('role') || 'Hr and Operations Head',
-    phone: urlParams.get('phone') || '8237358995',
-    email: urlParams.get('email') || 'hr@srgpune.in',
-    instagram: urlParams.get('instagram') || '',
-    facebook: urlParams.get('facebook') || '',
-    linkedin: urlParams.get('linkedin') || '',
-    location: urlParams.get('location') || '',
-    profileImg: urlParams.get('profile') || profileImg,
-    logoImg: urlParams.get('logo') || logoImg,
-    patternImg: urlParams.get('pattern') || '/pattern-tile.png'
-  };
+  // Check if using compressed URL with ID
+  const compressedId = urlParams.get('id');
+  let clientData;
+  
+  if (compressedId) {
+    // Load data from localStorage using the ID
+    const storedData = localStorage.getItem(`card_${compressedId}`);
+    if (storedData) {
+      const parsedData = JSON.parse(storedData);
+      clientData = {
+        name: parsedData.name || 'Asha Thakur',
+        role: parsedData.role || 'Hr and Operations Head',
+        phone: parsedData.phone || '8237358995',
+        email: parsedData.email || 'hr@srgpune.in',
+        instagram: parsedData.instagram || '',
+        facebook: parsedData.facebook || '',
+        linkedin: parsedData.linkedin || '',
+        location: parsedData.location || '',
+        profileImg: parsedData.profileUrl || profileImg,
+        logoImg: parsedData.logoUrl || logoImg,
+        patternImg: '/pattern-tile.png'
+      };
+    } else {
+      // Fallback to default if data not found
+      clientData = {
+        name: 'Asha Thakur',
+        role: 'Hr and Operations Head',
+        phone: '8237358995',
+        email: 'hr@srgpune.in',
+        instagram: '',
+        facebook: '',
+        linkedin: '',
+        location: '',
+        profileImg: profileImg,
+        logoImg: logoImg,
+        patternImg: '/pattern-tile.png'
+      };
+    }
+  } else {
+    // Original URL parameter method
+    clientData = {
+      name: urlParams.get('name') || 'Asha Thakur',
+      role: urlParams.get('role') || 'Hr and Operations Head',
+      phone: urlParams.get('phone') || '8237358995',
+      email: urlParams.get('email') || 'hr@srgpune.in',
+      instagram: urlParams.get('instagram') || '',
+      facebook: urlParams.get('facebook') || '',
+      linkedin: urlParams.get('linkedin') || '',
+      location: urlParams.get('location') || '',
+      profileImg: urlParams.get('profileUrl') || profileImg,
+      logoImg: urlParams.get('logoUrl') || logoImg,
+      patternImg: '/pattern-tile.png'
+    };
+  }
 
   return (
     <div className="screen">
