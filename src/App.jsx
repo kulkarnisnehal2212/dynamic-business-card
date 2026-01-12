@@ -26,7 +26,8 @@ const CLIENT_TEMPLATES = {
     linkedin: 'https://www.linkedin.com/company/swastikk-realty-group/',
     location: 'https://share.google/3brpEYu7twAhBYnou',
     profileImg: profileImg,
-    logoImg: logoImg
+    logoImg: logoImg,
+    patternImg: '/pattern-tile.png'
   },
   john: {
     name: 'John Doe',
@@ -38,7 +39,8 @@ const CLIENT_TEMPLATES = {
     linkedin: 'https://linkedin.com/in/johndoe',
     location: '',
     profileImg: 'https://i.ibb.co/7XqVPRT/default-profile.jpg',
-    logoImg: 'https://i.ibb.co/9yKKpQs/default-logo.png'
+    logoImg: 'https://i.ibb.co/9yKKpQs/default-logo.png',
+    patternImg: '/pattern-tile.png'
   },
   sarah: {
     name: 'Sarah Smith',
@@ -50,8 +52,36 @@ const CLIENT_TEMPLATES = {
     linkedin: 'https://linkedin.com/in/sarahsmith',
     location: 'https://maps.google.com/sarah-location',
     profileImg: 'https://i.ibb.co/7XqVPRT/default-profile.jpg',
-    logoImg: 'https://i.ibb.co/9yKKpQs/default-logo.png'
+    logoImg: 'https://i.ibb.co/9yKKpQs/default-logo.png',
+    patternImg: '/pattern-tile.png'
+  },
+  snehal: {
+    name: 'Snehal Kulkarni',
+    role: 'Software Developer',
+    phone: '9876543210',
+    email: 'kulkarnisnehal2212@gmail.com',
+    instagram: 'https://www.instagram.com/snehalkulkarni_531?igsh=MTBqdmwzZXV6czF1Ng==',
+    facebook: '',
+    linkedin: 'https://www.linkedin.com/in/snehal-kulkarni-74501b2b7?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app',
+    location: '',
+    profileImg: 'https://i.ibb.co/b5x6NGnH/profile.jpg',
+    logoImg: 'https://i.ibb.co/LzQRWCvT/logo-img.png',
+    patternImg: 'https://i.ibb.co/DFwWP2M/pattern-1.jpg'
   }
+  // ADD NEW CLIENTS HERE:
+  // newclient: {
+  //   name: 'Client Name',
+  //   role: 'Job Title',
+  //   phone: '1234567890',
+  //   email: 'client@email.com',
+  //   instagram: 'https://instagram.com/username',
+  //   facebook: 'https://facebook.com/username',
+  //   linkedin: 'https://linkedin.com/in/username',
+  //   location: 'https://maps.google.com/location',
+  //   profileImg: 'https://i.ibb.co/your-image.jpg',
+  //   logoImg: 'https://i.ibb.co/your-logo.jpg',
+  //   patternImg: '/pattern-tile.png'
+  // }
 };
 
 // QR Generator Component
@@ -234,7 +264,7 @@ function BusinessCard() {
         </div>
 
         <div className="pattern" style={{
-          backgroundImage: `url(/pattern-tile.png)`
+          backgroundImage: `url(${clientData.patternImg})`
         }}></div>
       </div>
     </div>
