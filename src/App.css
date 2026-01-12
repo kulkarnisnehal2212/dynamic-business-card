@@ -37,21 +37,21 @@ html, body {
 /* Very tall phones */
 @media (max-height: 950px) and (min-height: 851px) {
   .card {
-    transform: scale(0.9);
+    transform: scale(0.95);
   }
 }
 
 /* Standard phones */
 @media (max-height: 850px) and (min-height: 751px) {
   .card {
-    transform: scale(0.8);
+    transform: scale(0.85);
   }
 }
 
 /* Shorter phones */
 @media (max-height: 750px) and (min-height: 651px) {
   .card {
-    transform: scale(0.7);
+    transform: scale(0.75);
   }
 }
 
@@ -64,7 +64,7 @@ html, body {
   }
   
   .card {
-    transform: scale(0.6);
+    transform: scale(0.65);
   }
 }
 
@@ -75,7 +75,7 @@ html, body {
   }
   
   .card {
-    transform: scale(0.85);
+    transform: scale(0.9);
   }
 }
 
@@ -88,7 +88,7 @@ html, body {
   }
   
   .card {
-    transform: scale(0.65);
+    transform: scale(0.7);
   }
 }
 
@@ -99,7 +99,7 @@ html, body {
   }
   
   .card {
-    transform: scale(0.75);
+    transform: scale(0.8);
   }
 }
 
@@ -110,7 +110,7 @@ html, body {
   }
   
   .card {
-    transform: scale(0.8);
+    transform: scale(0.85);
   }
 }
 
@@ -225,116 +225,157 @@ html, body {
 
 /* ========== LAYOUT VARIATIONS ========== */
 
-/* COMPACT LAYOUT - Tighter spacing, smaller elements */
+/* COMPACT LAYOUT - Everything fits in viewport */
 .layout-compact .logo {
-  top: 15px;
-  width: 160px;
+  top: 10px;
+  width: 140px;
 }
 
 .layout-compact .profile {
-  top: 140px;
-  width: 160px;
-  height: 160px;
-}
-
-.layout-compact .name {
-  top: 320px;
-  font-size: 38px;
-}
-
-.layout-compact .role {
-  top: 365px;
-  font-size: 16px;
-}
-
-.layout-compact .phone {
-  top: 395px;
-  width: 240px;
-  height: 45px;
-}
-
-.layout-compact .email {
-  top: 450px;
-  width: 240px;
-  height: 45px;
-}
-
-.layout-compact .social-row {
-  top: 510px;
-  width: 240px;
-}
-
-/* MINIMAL LAYOUT - Clean, lots of space */
-.layout-minimal .logo {
-  top: 40px;
-  width: 150px;
-}
-
-.layout-minimal .profile {
-  top: 180px;
+  top: 120px;
   width: 140px;
   height: 140px;
 }
 
-.layout-minimal .name {
-  top: 350px;
-  font-size: 36px;
+.layout-compact .name {
+  top: 280px;
+  font-size: 32px;
 }
 
-.layout-minimal .role {
-  top: 395px;
-  font-size: 16px;
+.layout-compact .role {
+  top: 315px;
+  font-size: 14px;
 }
 
-.layout-minimal .phone {
-  top: 430px;
+.layout-compact .phone {
+  top: 340px;
+  width: 220px;
+  height: 40px;
+  font-size: 14px;
 }
 
-.layout-minimal .email {
-  top: 490px;
+.layout-compact .email {
+  top: 390px;
+  width: 220px;
+  height: 40px;
+  font-size: 14px;
 }
 
-.layout-minimal .social-row {
-  top: 550px;
-}
-
-/* CORPORATE LAYOUT - Professional, formal */
-.layout-corporate .logo {
-  top: 25px;
+.layout-compact .social-row {
+  top: 445px;
   width: 200px;
 }
 
-.layout-corporate .profile {
-  top: 160px;
+.layout-compact .social-icon {
+  width: 35px;
+  height: 35px;
+  font-size: 14px;
+}
+
+.layout-compact .pattern {
+  height: 200px;
+}
+
+/* MINIMAL LAYOUT - Ultra clean, fits viewport */
+.layout-minimal .logo {
+  top: 20px;
+  width: 120px;
+}
+
+.layout-minimal .profile {
+  top: 130px;
+  width: 120px;
+  height: 120px;
+}
+
+.layout-minimal .name {
+  top: 270px;
+  font-size: 28px;
+}
+
+.layout-minimal .role {
+  top: 300px;
+  font-size: 14px;
+}
+
+.layout-minimal .phone {
+  top: 330px;
+  width: 200px;
+  height: 38px;
+  font-size: 13px;
+}
+
+.layout-minimal .email {
+  top: 375px;
+  width: 200px;
+  height: 38px;
+  font-size: 13px;
+}
+
+.layout-minimal .social-row {
+  top: 425px;
   width: 180px;
+}
+
+.layout-minimal .social-icon {
+  width: 32px;
+  height: 32px;
+  font-size: 12px;
+}
+
+.layout-minimal .pattern {
   height: 180px;
 }
 
+/* CORPORATE LAYOUT - Professional, fits viewport */
+.layout-corporate .logo {
+  top: 15px;
+  width: 160px;
+}
+
+.layout-corporate .profile {
+  top: 140px;
+  width: 150px;
+  height: 150px;
+}
+
 .layout-corporate .name {
-  top: 360px;
-  font-size: 42px;
+  top: 310px;
+  font-size: 36px;
   font-weight: 600;
 }
 
 .layout-corporate .role {
-  top: 410px;
-  font-size: 18px;
+  top: 350px;
+  font-size: 16px;
   font-weight: 500;
 }
 
 .layout-corporate .phone {
-  top: 445px;
-  width: 260px;
+  top: 380px;
+  width: 240px;
+  height: 42px;
 }
 
 .layout-corporate .email {
-  top: 505px;
-  width: 260px;
+  top: 430px;
+  width: 240px;
+  height: 42px;
 }
 
 .layout-corporate .social-row {
-  top: 570px;
-  width: 260px;
+  top: 485px;
+  width: 220px;
+}
+
+.layout-corporate .social-icon {
+  width: 38px;
+  height: 38px;
+  font-size: 15px;
+}
+
+.layout-corporate .pattern {
+  height: 220px;
 }
 
 /* LAPTOP VIEW */
