@@ -308,32 +308,6 @@ function BusinessCard() {
       </div>
     </div>
   );
-}} />
-            </a>
-          )}
-          {clientData.facebook && (
-            <a href={clientData.facebook} className="social-icon" target="_blank" rel="noopener noreferrer">
-              <FontAwesomeIcon icon={faFacebook} />
-            </a>
-          )}
-          {clientData.linkedin && (
-            <a href={clientData.linkedin} className="social-icon" target="_blank" rel="noopener noreferrer">
-              <FontAwesomeIcon icon={faLinkedin} />
-            </a>
-          )}
-          {clientData.location && (
-            <a href={clientData.location} className="social-icon" target="_blank" rel="noopener noreferrer">
-              <FontAwesomeIcon icon={faLocationDot} />
-            </a>
-          )}
-        </div>
-
-        <div className="pattern" style={{
-          backgroundImage: `url(${clientData.patternImg})`
-        }}></div>
-      </div>
-    </div>
-  );
 }
 
 // Main App Component
