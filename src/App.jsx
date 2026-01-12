@@ -40,7 +40,8 @@ const CLIENT_TEMPLATES = {
     location: '',
     profileImg: 'https://i.ibb.co/7XqVPRT/default-profile.jpg',
     logoImg: 'https://i.ibb.co/9yKKpQs/default-logo.png',
-    patternImg: '/pattern-tile.png'
+    patternImg: '/pattern-tile.png',
+    layout: 'minimal'
   },
   sarah: {
     name: 'Sarah Smith',
@@ -53,7 +54,8 @@ const CLIENT_TEMPLATES = {
     location: 'https://maps.google.com/sarah-location',
     profileImg: 'https://i.ibb.co/7XqVPRT/default-profile.jpg',
     logoImg: 'https://i.ibb.co/9yKKpQs/default-logo.png',
-    patternImg: '/pattern-tile.png'
+    patternImg: '/pattern-tile.png',
+    layout: 'corporate'
   },
   snehal: {
     name: 'Snehal Kulkarni',
@@ -66,7 +68,11 @@ const CLIENT_TEMPLATES = {
     location: '',
     profileImg: 'https://i.ibb.co/b5x6NGnH/profile.jpg',
     logoImg: 'https://i.ibb.co/LzQRWCvT/logo-img.png',
-    patternImg: 'https://i.ibb.co/DFwWP2M/pattern-1.jpg'
+    patternImg: 'https://i.ibb.co/DFwWP2M/pattern-1.jpg',
+    layout: 'compact',
+    customStyles: {
+      logo: { top: '10px', width: '150px' }
+    }
   }
   // ADD NEW CLIENTS HERE:
   // newclient: {
@@ -80,7 +86,8 @@ const CLIENT_TEMPLATES = {
   //   location: 'https://maps.google.com/location',
   //   profileImg: 'https://i.ibb.co/your-image.jpg',
   //   logoImg: 'https://i.ibb.co/your-logo.jpg',
-  //   patternImg: '/pattern-tile.png'
+  //   patternImg: '/pattern-tile.png',
+  //   layout: 'default' // Options: default, compact, minimal, corporate
   // }
 };
 
@@ -220,30 +227,88 @@ function BusinessCard() {
   const clientParam = urlParams.get('client');
   
   const clientData = CLIENT_TEMPLATES[clientParam] || CLIENT_TEMPLATES.default;
+  const layoutClass = `layout-${clientData.layout || 'default'}`;
 
   return (
     <div className="screen">
-      <div className="card">
-        <img src={clientData.logoImg} className="logo" alt="Logo" />
-        <img src={clientData.profileImg} className="profile" alt="Profile" />
+      <div className={`card ${layoutClass}`}>
+        <img 
+          src={clientData.logoImg} 
+          className="logo" 
+          alt="Logo" 
+          style={clientData.customStyles?.logo || {}}
+        />
+        <img 
+          src={clientData.profileImg} 
+          className="profile" 
+          alt="Profile" 
+          style={clientData.customStyles?.profile || {}}
+        />
 
-        <h1 className="name">{clientData.name}</h1>
-        <p className="role">{clientData.role}</p>
+        <h1 
+          className="name" 
+          style={clientData.customStyles?.name || {}}
+        >
+          {clientData.name}
+        </h1>
+        <p 
+          className="role" 
+          style={clientData.customStyles?.role || {}}
+        >
+          {clientData.role}
+        </p>
 
-        <a href={`tel:${clientData.phone}`} className="action-btn phone">
+        <a 
+          href={`tel:${clientData.phone}`} 
+          className="action-btn phone"
+          style={clientData.customStyles?.phone || {}}
+        >
           <FontAwesomeIcon icon={faPhone} />
           {clientData.phone}
         </a>
 
-        <a href={`mailto:${clientData.email}`} className="action-btn email">
+        <a 
+          href={`mailto:${clientData.email}`} 
+          className="action-btn email"
+          style={clientData.customStyles?.email || {}}
+        >
           <FontAwesomeIcon icon={faEnvelope} />
           {clientData.email}
         </a>
 
-        <div className="social-row">
+        <div 
+          className="social-row"
+          style={clientData.customStyles?.socialRow || {}}
+        >
           {clientData.instagram && (
             <a href={clientData.instagram} className="social-icon" target="_blank" rel="noopener noreferrer">
               <FontAwesomeIcon icon={faInstagram} />
+            </a>
+          )}
+          {clientData.facebook && (
+            <a href={clientData.facebook} className="social-icon" target="_blank" rel="noopener noreferrer">
+              <FontAwesomeIcon icon={faFacebook} />
+            </a>
+          )}
+          {clientData.linkedin && (
+            <a href={clientData.linkedin} className="social-icon" target="_blank" rel="noopener noreferrer">
+              <FontAwesomeIcon icon={faLinkedin} />
+            </a>
+          )}
+          {clientData.location && (
+            <a href={clientData.location} className="social-icon" target="_blank" rel="noopener noreferrer">
+              <FontAwesomeIcon icon={faLocationDot} />
+            </a>
+          )}
+        </div>
+
+        <div className="pattern" style={{
+          backgroundImage: `url(${clientData.patternImg})`
+        }}></div>
+      </div>
+    </div>
+  );
+}} />
             </a>
           )}
           {clientData.facebook && (

@@ -223,6 +223,120 @@ html, body {
   image-rendering: crisp-edges;
 }
 
+/* ========== LAYOUT VARIATIONS ========== */
+
+/* COMPACT LAYOUT - Tighter spacing, smaller elements */
+.layout-compact .logo {
+  top: 15px;
+  width: 160px;
+}
+
+.layout-compact .profile {
+  top: 140px;
+  width: 160px;
+  height: 160px;
+}
+
+.layout-compact .name {
+  top: 320px;
+  font-size: 38px;
+}
+
+.layout-compact .role {
+  top: 365px;
+  font-size: 16px;
+}
+
+.layout-compact .phone {
+  top: 395px;
+  width: 240px;
+  height: 45px;
+}
+
+.layout-compact .email {
+  top: 450px;
+  width: 240px;
+  height: 45px;
+}
+
+.layout-compact .social-row {
+  top: 510px;
+  width: 240px;
+}
+
+/* MINIMAL LAYOUT - Clean, lots of space */
+.layout-minimal .logo {
+  top: 40px;
+  width: 150px;
+}
+
+.layout-minimal .profile {
+  top: 180px;
+  width: 140px;
+  height: 140px;
+}
+
+.layout-minimal .name {
+  top: 350px;
+  font-size: 36px;
+}
+
+.layout-minimal .role {
+  top: 395px;
+  font-size: 16px;
+}
+
+.layout-minimal .phone {
+  top: 430px;
+}
+
+.layout-minimal .email {
+  top: 490px;
+}
+
+.layout-minimal .social-row {
+  top: 550px;
+}
+
+/* CORPORATE LAYOUT - Professional, formal */
+.layout-corporate .logo {
+  top: 25px;
+  width: 200px;
+}
+
+.layout-corporate .profile {
+  top: 160px;
+  width: 180px;
+  height: 180px;
+}
+
+.layout-corporate .name {
+  top: 360px;
+  font-size: 42px;
+  font-weight: 600;
+}
+
+.layout-corporate .role {
+  top: 410px;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.layout-corporate .phone {
+  top: 445px;
+  width: 260px;
+}
+
+.layout-corporate .email {
+  top: 505px;
+  width: 260px;
+}
+
+.layout-corporate .social-row {
+  top: 570px;
+  width: 260px;
+}
+
 /* LAPTOP VIEW */
 @media (min-width: 1024px) {
   .screen {
