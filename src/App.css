@@ -630,3 +630,115 @@ body {
     transform: translateX(-50%) scale(1.15);
   }
 }
+
+
+/* ===== Only for Bikram Card ===== */
+.client-Bikram .logo {
+  width: 90px;     /* reduce logo size */
+  top: 18px;       /* move logo up */
+}
+
+.client-Bikram .profile {
+  top: 100px; 
+  height:140;
+  width:140;     /* push profile slightly down */
+}
+/* ===== Only for Bikram Branding ===== */
+/* ===== Bikram: Horizontal Logo + Company Name ===== */
+
+.client-Bikram .logo-wrap {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  z-index: 10;
+}
+
+/* Remove absolute for Bikram logo so flex works */
+.client-Bikram .logo {
+  position: static;        /* key fix */
+  transform: none;
+  width: 70px;            /* smaller so it doesn't clash */
+}
+
+/* Big bold company text */
+.client-Bikram .company-name {
+  font-size: 20px;
+  font-weight: 700;
+  color: #2b1c14;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  text-transform: uppercase;
+}
+
+
+
+
+/* ===== Bikram: Horizontal Logo + Company Name (Top Branding Bar) ===== */
+
+/* ===== Bikram: Horizontal Logo + Company Name (Top Branding Bar) ===== */
+
+.client-Bikram .logo-wrap {
+  position: absolute;
+  top: 6px;                          /* moved up */
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  z-index: 10;
+}
+
+/* Logo size and alignment */
+.client-Bikram .logo {
+  position: static;
+  transform: none;
+  width: 80px;                      /* slightly bigger */
+  height: auto;
+}
+
+/* Company name styling */
+.client-Bikram .company-name {
+  font-size: 22px;                  /* more impact */
+  font-weight: 800;
+  color: #2b1c14;
+  letter-spacing: 0.6px;
+  white-space: nowrap;
+  text-transform: uppercase;
+}
+
+/* ===== Profile positioning & size ===== */
+
+.client-Bikram .profile {
+  top: 95px;                       /* moved up */
+  width: 160px;                   /* slightly bigger */
+  height: 160px;
+  box-shadow: 0 14px 32px rgba(0,0,0,0.35);
+}
+
+/* ===== Text block alignment ===== */
+
+.client-Bikram .name {
+  top: 265px;
+}
+
+.client-Bikram .role {
+  top: 300px;
+}
+
+/* ===== Action buttons spacing ===== */
+
+.client-Bikram .phone {
+  top: 335px;
+}
+
+.client-Bikram .email {
+  top: 390px;
+}
+
+.client-Bikram .social-row {
+  top: 445px;
+}

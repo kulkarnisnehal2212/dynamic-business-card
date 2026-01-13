@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faQrcode, faCopy, faEye, faDownload, faUser } from "@fortawesome/free-solid-svg-icons";
 
 
+
 import {
   faInstagram,
   faFacebook,
@@ -76,22 +77,22 @@ const CLIENT_TEMPLATES = {
     customStyles: {
       logo: { top: '10px', width: '150px' }
     }
+  },
+
+  Bikram: {
+    name: 'Mr. Bikram burman',
+    role: 'Position - operation manager & Business Development head.',
+    phone: '+91 7798992527',
+    email: 'client@email.com',
+    instagram: '',
+    facebook: '',
+    linkedin: 'https://linkedin.com/in/username',
+    location: 'https://www.google.com/maps/dir//Office%20No.%204-A,%20Second%20Floor,%20Ganesham%20Commercial%20-A,%20Survey%20No.%2021/18-21/24,%20BRTS%20Road,%20Pimple%20Saudagar,%20Pune%20-%20411027',
+    profileImg: 'https://i.ibb.co/tS1wB1f/Whats-App-Image-2026-01-13-at-2-19-23-PM.jpg',
+    logoImg: 'https://i.ibb.co/nqNZ86KQ/image.png',
+    patternImg: 'https://i.ibb.co/DFwWP2M/pattern-1.jpg',
+    layout: 'compact' // Options: default, compact, minimal, corporate
   }
-  // ADD NEW CLIENTS HERE:
-  // newclient: {
-  //   name: 'Client Name',
-  //   role: 'Job Title',
-  //   phone: '1234567890',
-  //   email: 'client@email.com',
-  //   instagram: 'https://instagram.com/username',
-  //   facebook: 'https://facebook.com/username',
-  //   linkedin: 'https://linkedin.com/in/username',
-  //   location: 'https://maps.google.com/location',
-  //   profileImg: 'https://i.ibb.co/your-image.jpg',
-  //   logoImg: 'https://i.ibb.co/your-logo.jpg',
-  //   patternImg: '/pattern-tile.png',
-  //   layout: 'default' // Options: default, compact, minimal, corporate
-  // }
 };
 
 // QR Generator Component
@@ -120,68 +121,68 @@ function QRGenerator() {
   };
 
   return (
-  <div className="admin-container">
-    <div className="admin-card">
-      <h1 className="admin-title"><FontAwesomeIcon icon={faQrcode} /> Business Card Generator</h1>
+    <div className="admin-container">
+      <div className="admin-card">
+        <h1 className="admin-title"><FontAwesomeIcon icon={faQrcode} /> Business Card Generator</h1>
 
-      <label style={{ fontWeight: "600", marginBottom: "8px", display: "block" }}>  <FontAwesomeIcon icon={faUser} /> 
-        Select Client:
-      </label>
+        <label style={{ fontWeight: "600", marginBottom: "8px", display: "block" }}>  <FontAwesomeIcon icon={faUser} />
+          Select Client:
+        </label>
 
-      <select
-        className="admin-select"
-        value={selectedClient}
-        onChange={(e) => setSelectedClient(e.target.value)}
-      >
-        {Object.entries(CLIENT_TEMPLATES).map(([key, client]) => (
-          <option key={key} value={key}>
-            {client.name} - {client.role}
-          </option>
-        ))}
-      </select>
+        <select
+          className="admin-select"
+          value={selectedClient}
+          onChange={(e) => setSelectedClient(e.target.value)}
+        >
+          {Object.entries(CLIENT_TEMPLATES).map(([key, client]) => (
+            <option key={key} value={key}>
+              {client.name} - {client.role}
+            </option>
+          ))}
+        </select>
 
-      <button className="admin-button" onClick={generateURL}>
-        <FontAwesomeIcon icon={faQrcode} /> Generate URL & QR Code
-      </button>
+        <button className="admin-button" onClick={generateURL}>
+          <FontAwesomeIcon icon={faQrcode} /> Generate URL & QR Code
+        </button>
 
-      {generatedURL && (
-        <div className="admin-box">
-          <h3> Generated Business Card</h3>
+        {generatedURL && (
+          <div className="admin-box">
+            <h3> Generated Business Card</h3>
 
-          <p style={{ fontWeight: "600", marginTop: "10px" }}>Card URL:</p>
-          <div className="admin-url">{generatedURL}</div>
+            <p style={{ fontWeight: "600", marginTop: "10px" }}>Card URL:</p>
+            <div className="admin-url">{generatedURL}</div>
 
-          <div className="admin-actions">
-            <button className="admin-copy" onClick={copyURL}>
-                 <FontAwesomeIcon icon={faCopy} /> Copy URL
-            </button>
-            <button
-              className="admin-preview"
-              onClick={() => window.open(generatedURL, "_blank")}
-            >
-              <FontAwesomeIcon icon={faEye} /> Preview
-            </button>
-          </div>
-
-          {qrCodeURL && (
-            <div style={{ textAlign: "center", marginTop: "15px" }}>
-              <p style={{ fontWeight: "600" }}>QR Code:</p>
-              <img
-                src={qrCodeURL}
-                alt="QR Code"
-                style={{ maxWidth: "200px", marginTop: "10px" }}
-              />
-              <br />
-              <button className="admin-download" onClick={downloadQR} style={{ marginTop: "10px" }}>
-                  <FontAwesomeIcon icon={faDownload} /> Download QR
+            <div className="admin-actions">
+              <button className="admin-copy" onClick={copyURL}>
+                <FontAwesomeIcon icon={faCopy} /> Copy URL
+              </button>
+              <button
+                className="admin-preview"
+                onClick={() => window.open(generatedURL, "_blank")}
+              >
+                <FontAwesomeIcon icon={faEye} /> Preview
               </button>
             </div>
-          )}
-        </div>
-      )}
+
+            {qrCodeURL && (
+              <div style={{ textAlign: "center", marginTop: "15px" }}>
+                <p style={{ fontWeight: "600" }}>QR Code:</p>
+                <img
+                  src={qrCodeURL}
+                  alt="QR Code"
+                  style={{ maxWidth: "200px", marginTop: "10px" }}
+                />
+                <br />
+                <button className="admin-download" onClick={downloadQR} style={{ marginTop: "10px" }}>
+                  <FontAwesomeIcon icon={faDownload} /> Download QR
+                </button>
+              </div>
+            )}
+          </div>
+        )}
+      </div>
     </div>
-  </div>
-);
+  );
 
 }
 
@@ -189,41 +190,47 @@ function QRGenerator() {
 function BusinessCard() {
   const urlParams = new URLSearchParams(window.location.search);
   const clientParam = urlParams.get('client');
-  
+
   const clientData = CLIENT_TEMPLATES[clientParam] || CLIENT_TEMPLATES.default;
   const layoutClass = `layout-${clientData.layout || 'default'}`;
 
   return (
     <div className="screen">
-      <div className={`card ${layoutClass}`}>
-        <img 
-          src={clientData.logoImg} 
-          className="logo" 
-          alt="Logo" 
-          style={clientData.customStyles?.logo || {}}
-        />
-        <img 
-          src={clientData.profileImg} 
-          className="profile" 
-          alt="Profile" 
+      <div className={`card ${layoutClass} client-${clientParam || 'default'}`}>
+        <div className="logo-wrap">
+          <img
+            src={clientData.logoImg}
+            className="logo"
+            alt="Logo"
+            style={clientData.customStyles?.logo || {}}
+          />
+          {clientParam === "Bikram" && (
+            <span className="company-name">Nimbja Security Solutions Pvt Ltd</span>
+          )}
+        </div>
+
+        <img
+          src={clientData.profileImg}
+          className="profile"
+          alt="Profile"
           style={clientData.customStyles?.profile || {}}
         />
 
-        <h1 
-          className="name" 
+        <h1
+          className="name"
           style={clientData.customStyles?.name || {}}
         >
           {clientData.name}
         </h1>
-        <p 
-          className="role" 
+        <p
+          className="role"
           style={clientData.customStyles?.role || {}}
         >
           {clientData.role}
         </p>
 
-        <a 
-          href={`tel:${clientData.phone}`} 
+        <a
+          href={`tel:${clientData.phone}`}
           className="action-btn phone"
           style={clientData.customStyles?.phone || {}}
         >
@@ -231,8 +238,8 @@ function BusinessCard() {
           {clientData.phone}
         </a>
 
-        <a 
-          href={`mailto:${clientData.email}`} 
+        <a
+          href={`mailto:${clientData.email}`}
           className="action-btn email"
           style={clientData.customStyles?.email || {}}
         >
@@ -240,7 +247,7 @@ function BusinessCard() {
           {clientData.email}
         </a>
 
-        <div 
+        <div
           className="social-row"
           style={clientData.customStyles?.socialRow || {}}
         >
@@ -278,14 +285,14 @@ function BusinessCard() {
 function App() {
   const urlParams = new URLSearchParams(window.location.search);
   const isAdmin = urlParams.get('admin') === 'true';
-  
+
   // Admin generator access: ?admin=true
   if (isAdmin) {
     document.body.style.overflow = 'auto';
     document.documentElement.style.overflow = 'auto';
     return <QRGenerator />;
   }
-  
+
   // Client card view: ?client=name or default
   document.body.style.overflow = 'hidden';
   document.documentElement.style.overflow = 'hidden';
