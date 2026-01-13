@@ -2,6 +2,9 @@ import "./App.css";
 import logoImg from "./assets/logo-img.png";
 import profileImg from "./assets/Aasha.jpg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faQrcode, faCopy, faEye, faDownload, faUser } from "@fortawesome/free-solid-svg-icons";
+
+
 import {
   faInstagram,
   faFacebook,
@@ -35,12 +38,12 @@ const CLIENT_TEMPLATES = {
     phone: '9876543210',
     email: 'john@company.com',
     instagram: 'https://instagram.com/johndoe',
-    facebook: '',
+    facebook: 'https://facebook.com/johnsmith',
     linkedin: 'https://linkedin.com/in/johndoe',
-    location: '',
-    profileImg: 'https://i.ibb.co/7XqVPRT/default-profile.jpg',
-    logoImg: 'https://i.ibb.co/9yKKpQs/default-logo.png',
-    patternImg: '/pattern-tile.png',
+    location: 'https://www.google.com/maps/dir//shivajinagr%20pune',
+    profileImg: 'https://i.ibb.co/XrqcgJ2R/image.png',
+    logoImg: 'https://i.ibb.co/5hHpYf3b/image.png',
+    patternImg: 'https://i.ibb.co/XZR2zcMS/image.png',
     layout: 'minimal'
   },
   sarah: {
@@ -51,10 +54,10 @@ const CLIENT_TEMPLATES = {
     instagram: 'https://instagram.com/sarahsmith',
     facebook: 'https://facebook.com/sarahsmith',
     linkedin: 'https://linkedin.com/in/sarahsmith',
-    location: 'https://maps.google.com/sarah-location',
-    profileImg: 'https://i.ibb.co/7XqVPRT/default-profile.jpg',
-    logoImg: 'https://i.ibb.co/9yKKpQs/default-logo.png',
-    patternImg: '/pattern-tile.png',
+    location: 'https://www.google.com/maps/dir//hinjawadi,pune',
+    profileImg: 'https://i.ibb.co/twjrp8W5/image.png',
+    logoImg: 'https://i.ibb.co/GQ5JZ1K7/image.png',
+    patternImg: 'https://i.ibb.co/7tG2XSxM/image.png',
     layout: 'corporate'
   },
   snehal: {
@@ -63,9 +66,9 @@ const CLIENT_TEMPLATES = {
     phone: '9876543210',
     email: 'kulkarnisnehal2212@gmail.com',
     instagram: 'https://www.instagram.com/snehalkulkarni_531?igsh=MTBqdmwzZXV6czF1Ng==',
-    facebook: '',
+    facebook: 'https://facebook.com/snehal_kulkarni',
     linkedin: 'https://www.linkedin.com/in/snehal-kulkarni-74501b2b7?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app',
-    location: '',
+    location: 'https://www.google.com/maps/dir//vidyarthi%20sahayak%20samiti%20pune',
     profileImg: 'https://i.ibb.co/b5x6NGnH/profile.jpg',
     logoImg: 'https://i.ibb.co/LzQRWCvT/logo-img.png',
     patternImg: 'https://i.ibb.co/DFwWP2M/pattern-1.jpg',
@@ -117,108 +120,69 @@ function QRGenerator() {
   };
 
   return (
-    <div style={{ padding: '20px', maxWidth: '800px', margin: '0 auto', background: '#f5f5f5', minHeight: '100vh' }}>
-      <div style={{ background: 'white', padding: '30px', borderRadius: '10px', boxShadow: '0 4px 16px rgba(0,0,0,0.1)' }}>
-        <h1 style={{ color: '#4f3a39', textAlign: 'center', marginBottom: '20px' }}>🎯 Business Card Generator</h1>
-        
-        <div style={{ marginBottom: '20px' }}>
-          <label style={{ display: 'block', marginBottom: '10px', fontWeight: 'bold' }}>Select Client:</label>
-          <select 
-            value={selectedClient} 
-            onChange={(e) => setSelectedClient(e.target.value)}
-            style={{ padding: '10px', border: '2px solid #ddd', borderRadius: '5px', width: '100%', fontSize: '16px' }}
-          >
-            {Object.entries(CLIENT_TEMPLATES).map(([key, client]) => (
-              <option key={key} value={key}>{client.name} - {client.role}</option>
-            ))}
-          </select>
-        </div>
+  <div className="admin-container">
+    <div className="admin-card">
+      <h1 className="admin-title"><FontAwesomeIcon icon={faQrcode} /> Business Card Generator</h1>
 
-        <button 
-          onClick={generateURL}
-          style={{ 
-            backgroundColor: '#4f3a39', 
-            color: 'white', 
-            padding: '15px 30px', 
-            border: 'none', 
-            borderRadius: '5px',
-            fontSize: '16px',
-            cursor: 'pointer',
-            width: '100%',
-            marginBottom: '20px'
-          }}
-        >
-          🚀 Generate URL & QR Code
-        </button>
+      <label style={{ fontWeight: "600", marginBottom: "8px", display: "block" }}>  <FontAwesomeIcon icon={faUser} /> 
+        Select Client:
+      </label>
 
-        {generatedURL && (
-          <div style={{ background: '#f8f9fa', padding: '20px', borderRadius: '5px', borderLeft: '4px solid #4f3a39' }}>
-            <h3>✅ Generated Business Card:</h3>
-            
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 300px', gap: '20px', marginTop: '15px' }}>
-              <div>
-                <p style={{ marginBottom: '10px', fontWeight: 'bold' }}>Card URL:</p>
-                <div style={{ 
-                  background: 'white', 
-                  padding: '10px', 
-                  border: '1px solid #ddd', 
-                  borderRadius: '5px', 
-                  wordBreak: 'break-all', 
-                  fontSize: '12px',
-                  marginBottom: '10px'
-                }}>
-                  {generatedURL}
-                </div>
-                
-                <div style={{ display: 'flex', gap: '10px', marginBottom: '15px' }}>
-                  <button onClick={copyURL} style={{ 
-                    background: '#28a745', 
-                    color: 'white', 
-                    padding: '8px 15px', 
-                    border: 'none', 
-                    borderRadius: '3px',
-                    cursor: 'pointer'
-                  }}>
-                    📋 Copy URL
-                  </button>
-                  
-                  <button onClick={() => window.open(generatedURL, '_blank')} style={{ 
-                    background: '#007bff', 
-                    color: 'white', 
-                    padding: '8px 15px', 
-                    border: 'none', 
-                    borderRadius: '3px',
-                    cursor: 'pointer'
-                  }}>
-                    👀 Preview Card
-                  </button>
-                </div>
-              </div>
-              
-              {qrCodeURL && (
-                <div style={{ textAlign: 'center' }}>
-                  <p style={{ marginBottom: '10px', fontWeight: 'bold' }}>QR Code:</p>
-                  <img src={qrCodeURL} alt="QR Code" style={{ maxWidth: '100%', border: '1px solid #ddd' }} />
-                  <br/>
-                  <button onClick={downloadQR} style={{ 
-                    background: '#6f42c1', 
-                    color: 'white', 
-                    padding: '8px 15px', 
-                    border: 'none', 
-                    borderRadius: '3px',
-                    cursor: 'pointer',
-                    marginTop: '10px'
-                  }}>
-                    💾 Download QR
-                  </button>
-                </div>
-              )}
-            </div>
+      <select
+        className="admin-select"
+        value={selectedClient}
+        onChange={(e) => setSelectedClient(e.target.value)}
+      >
+        {Object.entries(CLIENT_TEMPLATES).map(([key, client]) => (
+          <option key={key} value={key}>
+            {client.name} - {client.role}
+          </option>
+        ))}
+      </select>
+
+      <button className="admin-button" onClick={generateURL}>
+        <FontAwesomeIcon icon={faQrcode} /> Generate URL & QR Code
+      </button>
+
+      {generatedURL && (
+        <div className="admin-box">
+          <h3> Generated Business Card</h3>
+
+          <p style={{ fontWeight: "600", marginTop: "10px" }}>Card URL:</p>
+          <div className="admin-url">{generatedURL}</div>
+
+          <div className="admin-actions">
+            <button className="admin-copy" onClick={copyURL}>
+                 <FontAwesomeIcon icon={faCopy} /> Copy URL
+            </button>
+            <button
+              className="admin-preview"
+              onClick={() => window.open(generatedURL, "_blank")}
+            >
+              <FontAwesomeIcon icon={faEye} /> Preview
+            </button>
           </div>
-        )}
-      </div>
+
+          {qrCodeURL && (
+            <div style={{ textAlign: "center", marginTop: "15px" }}>
+              <p style={{ fontWeight: "600" }}>QR Code:</p>
+              <img
+                src={qrCodeURL}
+                alt="QR Code"
+                style={{ maxWidth: "200px", marginTop: "10px" }}
+              />
+              <br />
+              <button className="admin-download" onClick={downloadQR} style={{ marginTop: "10px" }}>
+                  <FontAwesomeIcon icon={faDownload} /> Download QR
+              </button>
+            </div>
+          )}
+        </div>
+      )}
     </div>
-  );
+  </div>
+);
+
 }
 
 // Business Card Component
