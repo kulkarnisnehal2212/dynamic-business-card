@@ -83,7 +83,7 @@ const CLIENT_TEMPLATES = {
     name: 'Mr. Bikram burman',
     role: 'Position - operation manager & Business Development head.',
     phone: '+91 7798992527',
-    email: 'client@email.com',
+    email: 'hr@nimbjasolution.com',
     instagram: '',
     facebook: '',
     linkedin: 'https://linkedin.com/in/username',
