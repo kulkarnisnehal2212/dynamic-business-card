@@ -598,7 +598,7 @@ body {
 /* Social icons – slightly softer & premium */
 .layout-compact .social-icon {
   background: linear-gradient(135deg, #4f3a39, #3a2422);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
 }
 
 /* Pattern – subtle, not too heavy */
@@ -611,8 +611,8 @@ body {
   padding: 8px;
   border-radius: 50%;
   box-shadow:
-    0 12px 30px rgba(0,0,0,0.35),
-    inset 0 1px 2px rgba(255,255,255,0.7);
+    0 12px 30px rgba(0, 0, 0, 0.35),
+    inset 0 1px 2px rgba(255, 255, 255, 0.7);
   border: 2px solid rgba(79, 58, 57, 0.4);
   backdrop-filter: blur(6px);
 }
@@ -620,7 +620,8 @@ body {
 
 /* Slight zoom + smooth hover for logo */
 .layout-compact .logo {
-  transform: translateX(-50%) scale(1.1);  /* zoom in */
+  transform: translateX(-50%) scale(1.1);
+  /* zoom in */
   transition: transform 0.3s ease;
 }
 
@@ -634,15 +635,19 @@ body {
 
 /* ===== Only for Bikram Card ===== */
 .client-Bikram .logo {
-  width: 90px;     /* reduce logo size */
-  top: 18px;       /* move logo up */
+  width: 90px;
+  /* reduce logo size */
+  top: 18px;
+  /* move logo up */
 }
 
 .client-Bikram .profile {
-  top: 100px; 
-  height:140;
-  width:140;     /* push profile slightly down */
+  top: 100px;
+  height: 140;
+  width: 140;
+  /* push profile slightly down */
 }
+
 /* ===== Only for Bikram Branding ===== */
 /* ===== Bikram: Horizontal Logo + Company Name ===== */
 
@@ -659,9 +664,11 @@ body {
 
 /* Remove absolute for Bikram logo so flex works */
 .client-Bikram .logo {
-  position: static;        /* key fix */
+  position: static;
+  /* key fix */
   transform: none;
-  width: 70px;            /* smaller so it doesn't clash */
+  width: 70px;
+  /* smaller so it doesn't clash */
 }
 
 /* Big bold company text */
@@ -683,7 +690,8 @@ body {
 
 .client-Bikram .logo-wrap {
   position: absolute;
-  top: 6px;                          /* moved up */
+  top: 6px;
+  /* moved up */
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -696,13 +704,15 @@ body {
 .client-Bikram .logo {
   position: static;
   transform: none;
-  width: 80px;                      /* slightly bigger */
+  width: 80px;
+  /* slightly bigger */
   height: auto;
 }
 
 /* Company name styling */
 .client-Bikram .company-name {
-  font-size: 22px;                  /* more impact */
+  font-size: 22px;
+  /* more impact */
   font-weight: 800;
   color: #2b1c14;
   letter-spacing: 0.6px;
@@ -713,10 +723,12 @@ body {
 /* ===== Profile positioning & size ===== */
 
 .client-Bikram .profile {
-  top: 95px;                       /* moved up */
-  width: 160px;                   /* slightly bigger */
+  top: 95px;
+  /* moved up */
+  width: 160px;
+  /* slightly bigger */
   height: 160px;
-  box-shadow: 0 14px 32px rgba(0,0,0,0.35);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.35);
 }
 
 /* ===== Text block alignment ===== */
@@ -742,3 +754,182 @@ body {
 .client-Bikram .social-row {
   top: 445px;
 }
+
+/* ================= Bikram Card – Responsive Branding ================= */
+
+/* Base (mobile first) */
+.client-Bikram .logo-wrap {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 10;
+  flex-wrap: nowrap;
+}
+
+.client-Bikram .logo {
+  position: static;
+  transform: none;
+  width: 60px;
+  height: auto;
+}
+
+.client-Bikram .company-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: #2b1c14;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* Profile */
+.client-Bikram .profile {
+  top: 85px;
+  width: 130px;
+  height: 130px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
+}
+
+/* Text & buttons */
+.client-Bikram .name {
+  top: 240px;
+}
+
+.client-Bikram .role {
+  top: 275px;
+font-size:13px;
+}
+
+.client-Bikram .phone {
+  top: 310px;
+}
+
+.client-Bikram .email {
+  top: 365px;
+}
+
+.client-Bikram .social-row {
+    top: 442px;
+    width: 140px;
+    gap: 10px;
+    justify-content: center;
+  }
+
+/* ================= Tablet ================= */
+@media (min-width: 600px) {
+  .client-Bikram .logo {
+    width: 70px;
+  }
+
+  .client-Bikram .company-name {
+    font-size: 16px;
+  }
+
+  .client-Bikram .profile {
+    width: 150px;
+    height: 150px;
+    top: 95px;
+  }
+
+  .client-Bikram .name {
+    top: 265px;
+  }
+
+  .client-Bikram .role {
+    top: 300px;
+  }
+  .client-Bikram .social-row {
+    top: 442px;
+    width: 140px;
+    gap: 10px;
+    justify-content: center;
+  }
+}
+
+/* ================= Laptop – Slightly Compact for Bikram ================= */
+@media (min-width: 1024px) {
+
+  .client-Bikram .logo-wrap {
+    top: 18px;
+    gap: 12px;
+  }
+
+  .client-Bikram .logo {
+    width: 70px;
+    /* was 85px */
+  }
+
+  .client-Bikram .company-name {
+    font-size: 18px;
+    /* was 22px */
+    letter-spacing: 0.6px;
+  }
+
+  .client-Bikram .profile {
+    top: 90px;
+    width: 150px;
+    /* was 170px */
+    height: 150px;
+  }
+
+  .client-Bikram .name {
+    top: 270px;
+    font-size: 30px;
+  }
+
+  .client-Bikram .role {
+    top: 310px;
+    font-size: 14px;
+  }
+
+  .client-Bikram .phone {
+    top: 340px;
+    font-size: 13;
+  }
+
+  .client-Bikram .email {
+    top: 390px;
+    font-size: 10px;
+  }
+
+  .client-Bikram .social-row {
+    top: 442px;
+    width: 140px;
+    gap: 10px;
+    justify-content: center;
+  }
+}
+@media (max-width: 480px) {
+  .client-Bikram .email {
+    font-size: 12px;
+    padding: 0 12px;
+  }
+
+  .client-Bikram .action-btn {
+    width: 220px;        /* little wider */
+    height: 38px;
+  }
+
+  .client-Bikram .action-btn span,
+  .client-Bikram .action-btn {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
